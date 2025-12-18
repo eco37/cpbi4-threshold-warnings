@@ -67,17 +67,17 @@ class CustomSensor(CBPiExtension):
                         print(TEMP_HW)
                         if temp != None and temp != "":
                             if TEMP_HW != None and TEMP_HW != "":
-                                if temp > TEMP_HW:
+                                if float(temp) > float(TEMP_HW):
                                     print("TEMP HW")
                                     self.cbpi.notify("Threshold Warning", "{}: Temp High Warning {}".format(fermenter_name, temp), NotificationType.DANGER)
                             if TEMP_LW != None and TEMP_LW != "":
-                                if temp < TEMP_LW:
+                                if float(temp) < float(TEMP_LW):
                                     self.cbpi.notify("Threshold Warning", "{}: Temp Low Warning {}".format(fermenter_name, temp), NotificationType.DANGER)
 
                             try:
                                 if fermenter.target_temp != None and str(fermenter.target_temp).strip() != "":
                                     if TEMP_FERMENTER_DIV != None and TEMP_FERMENTER_DIV != "":
-                                        if abs(fermenter.target_temp, temp) > TEMP_FERMENTER_DIV:
+                                        if abs(fermenter.target_temp, temp) > float(TEMP_FERMENTER_DIV):
                                             self.cbpi.notify("Threshold Warning", "{}: Fermenter Step Temp Diviation Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_temp), NotificationType.WARNING)
 
                             except Exception as e:
@@ -92,16 +92,16 @@ class CustomSensor(CBPiExtension):
                         pressure = self.cbpi.sensor.get_sensor_value(fermenter.pressure_sensor).get("value")
                         if pressure != None and pressure != "":
                             if PRESSURE_HW != None and PRESSURE_HW != "":
-                                if pressure > PRESSURE_HW:
+                                if float(pressure) > float(PRESSURE_HW):
                                     self.cbpi.notify("Threshold Warning", "{}: Pressure High Warning {}".format(fermenter_name, pressure), NotificationType.DANGER)
                             if PRESSURE_LW != None and PRESSURE_LW != "":
-                                if pressure > PRESSURE_LW:
+                                if float(pressure) > float(PRESSURE_LW):
                                     self.cbpi.notify("Threshold Warning", "{}: Pressure Low Warning {}".format(fermenter_name, pressure), NotificationType.DANGER)
 
                             try:
                                 if fermenter.target_pressure != None and str(fermenter.target_pressure).strip() != "":
                                     if PRESSURE_FERMENTER_DIV != None and PRESSURE_FERMENTER_DIV != "":
-                                        if abs(fermenter.target_pressure, pressure) > PRESSURE_FERMENTER_DIV:
+                                        if abs(fermenter.target_pressure, pressure) > float(PRESSURE_FERMENTER_DIV):
                                             self.cbpi.notify("Threshold Warning", "{}: Fermenter Step Pressure Diviation Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_pressure), NotificationType.WARNING)
 
                             except Exception as e:
