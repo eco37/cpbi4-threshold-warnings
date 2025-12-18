@@ -136,7 +136,8 @@ class CustomSensor(CBPiExtension):
 
                 logger.info("DONE")
 
-            await asyncio.sleep(900)
+            #await asyncio.sleep(900)
+            await asyncio.sleep(10)
 
     async def threshold_warnings_settings(self):
         PRESSURE_HW = self.cbpi.config.get("Threshold_Pressure_HW", None)
