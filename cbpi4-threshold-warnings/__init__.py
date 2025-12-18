@@ -70,10 +70,10 @@ class CustomSensor(CBPiExtension):
                             if TEMP_HW != None and TEMP_HW != "":
                                 if float(temp) > float(TEMP_HW):
                                     print("TEMP HW")
-                                    self.cbpi.notify("Threshold Warning", "{}: Temp High Warning {}".format(fermenter_name, temp), NotificationType.DANGER)
+                                    self.cbpi.notify("Threshold Warning", "{}: Temp High Warning {}".format(fermenter_name, temp), NotificationType.ERROR)
                             if TEMP_LW != None and TEMP_LW != "":
                                 if float(temp) < float(TEMP_LW):
-                                    self.cbpi.notify("Threshold Warning", "{}: Temp Low Warning {}".format(fermenter_name, temp), NotificationType.DANGER)
+                                    self.cbpi.notify("Threshold Warning", "{}: Temp Low Warning {}".format(fermenter_name, temp), NotificationType.ERROR)
 
                             try:
                                 if fermenter.target_temp != None and str(fermenter.target_temp).strip() != "":
@@ -94,10 +94,10 @@ class CustomSensor(CBPiExtension):
                         if pressure != None and pressure != "":
                             if PRESSURE_HW != None and PRESSURE_HW != "":
                                 if float(pressure) > float(PRESSURE_HW):
-                                    self.cbpi.notify("Threshold Warning", "{}: Pressure High Warning {}".format(fermenter_name, pressure), NotificationType.DANGER)
+                                    self.cbpi.notify("Threshold Warning", "{}: Pressure High Warning {}".format(fermenter_name, pressure), NotificationType.ERROR)
                             if PRESSURE_LW != None and PRESSURE_LW != "":
                                 if float(pressure) > float(PRESSURE_LW):
-                                    self.cbpi.notify("Threshold Warning", "{}: Pressure Low Warning {}".format(fermenter_name, pressure), NotificationType.DANGER)
+                                    self.cbpi.notify("Threshold Warning", "{}: Pressure Low Warning {}".format(fermenter_name, pressure), NotificationType.ERROR)
 
                             try:
                                 if fermenter.target_pressure != None and str(fermenter.target_pressure).strip() != "":
