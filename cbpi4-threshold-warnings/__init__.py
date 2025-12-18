@@ -58,7 +58,7 @@ class CustomSensor(CBPiExtension):
                 
                 print("MID")
 
-                print(fermenter.pressure_sensor)
+                print(fermenter)
                 
                 if fermenter.sensor != None and fermenter.sensor.strip() != "":
                     try:
@@ -102,7 +102,7 @@ class CustomSensor(CBPiExtension):
                             try:
                                 if fermenter.target_pressure != None and str(fermenter.target_pressure).strip() != "":
                                     if PRESSURE_FERMENTER_DIV != None and PRESSURE_FERMENTER_DIV != "":
-                                        if abs(fermenter.target_pressure - pressure) > float(PRESSURE_FERMENTER_DIV):
+                                        if abs(float(fermenter.target_pressure) - float(pressure)) > float(PRESSURE_FERMENTER_DIV):
                                             self.cbpi.notify("Threshold Warning", "{}: Fermenter Target Pressure Diviation Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_pressure), NotificationType.WARNING)
 
                             except Exception as e:
