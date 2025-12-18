@@ -10,6 +10,6 @@ setup(name='cbpi4-threshold-warnings',
       package_data={
         # If any package contains *.txt or *.rst files, include them:
       '': ['*.txt', '*.rst', '*.yaml'],
-      'cbpi4-warnings': ['*','*.txt', '*.rst', '*.yaml']},
+      'cbpi4-threshold-warnings': ['*','*.txt', '*.rst', '*.yaml']},
       packages=['cbpi4-threshold-warnings'],
      )
