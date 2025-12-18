@@ -32,11 +32,7 @@ class CustomSensor(CBPiExtension):
 
         await asyncio.sleep(5)
         while True:
-            print("Start1")
             await self.threshold_warnings_settings()
-
-            logger.info("Start")
-            print("Start2")
 
             PRESSURE_HW = self.cbpi.config.get("Threshold_Pressure_HW", None)
             PRESSURE_LW = self.cbpi.config.get("Threshold_Pressure_LW", None)
@@ -47,30 +43,24 @@ class CustomSensor(CBPiExtension):
 
             for fermenter in self.cbpi.fermenter.data:
                 logger.info("Fermenter")
-                print("Start3")
+
                 fermenter_name = "<NO NAME>"
                 if fermenter.name != None or fermenter.name.strip() != "":
                     fermenter_name = fermenter.name
 
-                print("NAME")
-
-                print(fermenter.sensor)
-                
-                print("MID")
-
-                print(fermenter)
-                print(fermenter.target_pressure)
+                #print("NAME")
+                #print(fermenter.sensor)
+                #print("MID")
+                #print(fermenter)
+                #print(fermenter.target_pressure)
                 
                 if fermenter.sensor != None and fermenter.sensor.strip() != "":
                     try:
                         logger.info(self.cbpi.sensor.get_sensor_value(fermenter.sensor))
                         temp = self.cbpi.sensor.get_sensor_value(fermenter.sensor).get("value")
-                        print(temp)
-                        print(TEMP_HW)
                         if temp != None and temp != "":
                             if TEMP_HW != None and TEMP_HW != "":
                                 if float(temp) > float(TEMP_HW):
-                                    print("TEMP HW")
                                     self.cbpi.notify("Threshold Warning", "{}: Temp High Warning {}".format(fermenter_name, temp), NotificationType.ERROR)
                             if TEMP_LW != None and TEMP_LW != "":
                                 if float(temp) < float(TEMP_LW):
@@ -104,7 +94,7 @@ class CustomSensor(CBPiExtension):
                                 if fermenter.target_pressure != None and str(fermenter.target_pressure).strip() != "":
                                     if PRESSURE_FERMENTER_DIV != None and PRESSURE_FERMENTER_DIV != "":
                                         if abs(float(fermenter.target_pressure) - float(pressure)) > float(PRESSURE_FERMENTER_DIV):
-                                            self.cbpi.notify("Threshold Warning", "{}: Fermenter Target Pressure Diviation Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_pressure), NotificationType.WARNING)
+                                            self.cbpi.notify("Threshold Warning", "{}: Fermenter Target Pressure Diviation Warning {} - Target: {}".format(fermenter_name, pressure, fermenter.target_pressure), NotificationType.WARNING)
 
                             except Exception as e:
                                 logger.error("Error Pressure: " + str(e))
@@ -184,6 +174,8 @@ class CustomSensor(CBPiExtension):
                 except Exception as e:
                     logger.warning('Unable to update config')
                     logger.error(e)
+
+
 
 
         if TEMP_HW is None:
