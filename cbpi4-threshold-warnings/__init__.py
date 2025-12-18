@@ -63,6 +63,8 @@ class CustomSensor(CBPiExtension):
                     try:
                         logger.info(self.cbpi.sensor.get_sensor_value(fermenter.sensor))
                         temp = self.cbpi.sensor.get_sensor_value(fermenter.sensor).get("value")
+                        print(temp)
+                        print(TEMP_HW)
                         if temp != None and temp != "":
                             if TEMP_HW != None and TEMP_HW != "":
                                 if temp > TEMP_HW:
