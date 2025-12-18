@@ -72,7 +72,7 @@ class CustomSensor(CBPiExtension):
                                 if fermenter.target_temp != None and str(fermenter.target_temp).strip() != "":
                                     if TEMP_FERMENTER_DIV != None and TEMP_FERMENTER_DIV != "":
                                         if abs(fermenter.target_temp, temp) > TEMP_FERMENTER_DIV:
-                                            self.cbpi.notify("Threshold Warning", "{}: Fermenter Step Temp Diff Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_temp), NotificationType.DANGER)
+                                            self.cbpi.notify("Threshold Warning", "{}: Fermenter Step Temp Diviation Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_temp), NotificationType.WARNING)
 
                             except Exception as e:
                                 logger.error("Error Temp: " + str(e))
@@ -96,7 +96,7 @@ class CustomSensor(CBPiExtension):
                                 if fermenter.target_pressure != None and str(fermenter.target_pressure).strip() != "":
                                     if PRESSURE_FERMENTER_DIV != None and PRESSURE_FERMENTER_DIV != "":
                                         if abs(fermenter.target_pressure, pressure) > PRESSURE_FERMENTER_DIV:
-                                            self.cbpi.notify("Threshold Warning", "{}: Fermenter Step Pressure Diff Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_pressure), NotificationType.DANGER)
+                                            self.cbpi.notify("Threshold Warning", "{}: Fermenter Step Pressure Diviation Warning {} - Target: {}".format(fermenter_name, temp, fermenter.target_pressure), NotificationType.WARNING)
 
                             except Exception as e:
                                 logger.error("Error Pressure: " + str(e))
